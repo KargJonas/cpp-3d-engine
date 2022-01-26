@@ -16,7 +16,7 @@ MINGW32:=/usr/bin/i686-w64-mingw32-
 SRC=src/*
 
 main : src/main.cc
-	g++ -o $@ $^ -lX11 -L/src/lib/rawdraw_sf.h
+	g++ -o $@ $^ -lX11 -L/src/lib/rawdraw_sf.h -w
 
 # main_ogl : src/main.cc src/*
 # 	g++ -o $@ $^ -lX11 -lm -lpthread -lXinerama -lXext -lGL -g -lX11 -lXinerama -lGL -DCNFGOGL -Wall

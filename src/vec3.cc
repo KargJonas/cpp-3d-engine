@@ -4,37 +4,37 @@
 
 using namespace std;
 
-class Vector {
+class Vec3 {
 public:
   float x;
   float y;
   float z;
 
-  Vector(float _x, float _y, float _z) {
+  Vec3(float _x, float _y, float _z) {
     x = _x;
     y = _y;
     z = _z;
   }
 
-  // ~Vector() {
+  // ~Vec3() {
   //   delete x;
   //   delete y;
   //   delete z;
   // }
 
   string toString() {
-    return fmt::format("Vector ( {}, {}, {} )", x, y, z);
+    return fmt::format("Vec3 ( {}, {}, {} )", x, y, z);
   }
 
   void print() {
     cout << toString() << endl;
   }
 
-  Vector clone() {
-    return Vector(x, y, z);
+  Vec3 clone() {
+    return Vec3(x, y, z);
   }
 
-  Vector mul(float factor) {
+  Vec3 mul(float factor) {
     x *= factor;
     y *= factor;
     z *= factor;
@@ -42,7 +42,7 @@ public:
     return *this;
   }
 
-  Vector div(float factor) {
+  Vec3 div(float factor) {
     x /= factor;
     y /= factor;
     z /= factor;
@@ -54,15 +54,15 @@ public:
     return sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
   }
 
-  Vector unit() {
+  Vec3 unit() {
     return div(mag());
   }
 
-  Vector scale(float length) {
+  Vec3 scale(float length) {
     return unit().mul(length);
   }
 
-  Vector add(Vector other) {
+  Vec3 add(Vec3 other) {
     x += other.x;
     y += other.y;
     z += other.z;
@@ -70,7 +70,7 @@ public:
     return *this;
   }
 
-  Vector sub(Vector other) {
+  Vec3 sub(Vec3 other) {
     x -= other.x;
     y -= other.y;
     z -= other.z;
@@ -78,18 +78,18 @@ public:
     return *this;
   }
 
-  float dist(Vector other) {
+  float dist(Vec3 other) {
     return clone().sub(other).mag();
   }
 
-  float dot(Vector other) {
+  float dot(Vec3 other) {
     return x * other.x +
            y * other.y +
            z * other.z;
   }
 
   // Multiply components individually => results in vector
-  Vector compMul(Vector other) {
+  Vec3 compMul(Vec3 other) {
     x *= other.x;
     y *= other.y;
     z *= other.z;
@@ -97,7 +97,7 @@ public:
     return *this;
   }
 
-  Vector cross(Vector other) {
+  Vec3 cross(Vec3 other) {
     float _x = y * other.z - z * other.y;
     float _y = z * other.x - x * other.z;
     float _z = x * other.y - y * other.x;
@@ -109,7 +109,7 @@ public:
     return *this;
   }
 
-  Vector rotateX(float angle) {
+  Vec3 rotateX(float angle) {
     float sinA = sin(angle);
     float cosA = cos(angle);
 
@@ -119,7 +119,7 @@ public:
     return *this;
   }
 
-  Vector rotateY(float angle) {
+  Vec3 rotateY(float angle) {
     float sinA = sin(angle);
     float cosA = cos(angle);
 
@@ -129,7 +129,7 @@ public:
     return *this;
   }
 
-  Vector rotateZ(float angle) {
+  Vec3 rotateZ(float angle) {
     float sinA = sin(angle);
     float cosA = cos(angle);
 
@@ -139,26 +139,26 @@ public:
     return *this;
   }
 
-  Vector rotate(Vector angle) {
+  Vec3 rotate(Vec3 angle) {
     return rotateX(angle.x)
       .rotateY(angle.y)
       .rotateZ(angle.z);
   }
 
-  Vector rotateAround(Vector pivot, Vector angle) {
+  Vec3 rotateAround(Vec3 pivot, Vec3 angle) {
     return sub(pivot)
       .rotate(angle)
       .add(pivot);
   }
 
-  Vector projectZ() {
+  Vec3 projectZ() {
     x /= z;
     y /= z;
 
     return *this;
   }
 
-  Vector abs() {
+  Vec3 abs() {
     x = std::abs(x);
     y = std::abs(y);
     z = std::abs(z);

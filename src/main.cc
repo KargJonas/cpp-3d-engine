@@ -9,8 +9,9 @@ extern "C" {
 #include "./util/color.h"
 #include "./camera.h"
 #include "./triangle.h"
-#include "./solid.h"
-#include "./vector.h"
+// #include "./solid.h"
+#include "./vec3.h"
+#include "./binaryReader.h"
 
 #define PI M_PI
 
@@ -21,13 +22,20 @@ void HandleDestroy() { }
 
 int main()
 {
-	cout << "start.." << endl;
-	Vector v1 = v(1, 0, 0);
+	cout << "... Starting ..." << endl;
 
-	v1.rotate(v(0, 0, PI)).print();
+	// Path has to be relative to compiled file
+	// cout << readFile("assets/cube.bin.stl") << endl;
 
-	Camera c = Camera(v(), v());
-	c.print();
+	readFile("assets/cube.bin.stl");
+
+	// Camera c = Camera(v(), v());
+	// c.print();
+
+	// Solid s = Solid(v(), v(), { });
+
+
+
 
 	// CNFGSetup( "Example App", 1024, 768 );
 	// while(1)

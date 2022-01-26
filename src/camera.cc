@@ -1,18 +1,18 @@
-#include "./vector.h"
+#include "./vec3.h"
 #include "fmt/format.h"
 #include <iostream>
 
 class Camera {
 public:
-  Vector position;
-  Vector rotation;
-  Vector direction;
+  Vec3 position;
+  Vec3 rotation;
+  Vec3 direction;
 
-  Camera(Vector _position, Vector _rotation)
-    : position(_position), rotation(_rotation), direction(Vector(0, 0, 0)) {
+  Camera(Vec3 _position, Vec3 _rotation)
+    : position(_position), rotation(_rotation), direction(Vec3(0, 0, 0)) {
   }
 
-  void aimTowards(Vector point) {
+  void aimTowards(Vec3 point) {
 
   }
 

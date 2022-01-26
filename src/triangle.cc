@@ -1,12 +1,12 @@
-// #include "./vector.h"
+// #include "./vec3.h"
 
 class Triangle {
 public:
-  Vector vertices[3];
-  Vector normal;
+  Vec3 vertices[3];
+  Vec3 normal;
   float depth;
 
-  Triangle(Vector _normal, Vector v1, Vector v2, Vector v3)
+  Triangle(Vec3 _normal, Vec3 v1, Vec3 v2, Vec3 v3)
     : normal(_normal), vertices({ v1, v2, v3 }) {
   }
 

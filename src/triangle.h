@@ -1,6 +1,6 @@
 #pragma once
 #include "triangle.cc"
 
-// Triangle t(Vector v1, Vector v2, Vector v3) {
+// Triangle t(Vec3 v1, Vec3 v2, Vec3 v3) {
 //   return Triangle(v1, v2, v3);
 // }
