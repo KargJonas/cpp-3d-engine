@@ -27,15 +27,8 @@ int main()
 	// Path has to be relative to compiled file
 	// cout << readFile("assets/cube.bin.stl") << endl;
 
+	// readFile("assets/torus.bin.stl");
 	readFile("assets/cube.bin.stl");
-
-	// Camera c = Camera(v(), v());
-	// c.print();
-
-	// Solid s = Solid(v(), v(), { });
-
-
-
 
 	// CNFGSetup( "Example App", 1024, 768 );
 	// while(1)
