@@ -9,7 +9,7 @@ extern "C" {
 #include "./util/color.h"
 #include "./camera.h"
 #include "./triangle.h"
-// #include "./solid.h"
+#include "./solid.h"
 #include "./vec3.h"
 #include "./binaryReader.h"
 
@@ -27,8 +27,11 @@ int main()
 	// Path has to be relative to compiled file
 	// cout << readFile("assets/cube.bin.stl") << endl;
 
-	// readFile("assets/torus.bin.stl");
-	readFile("assets/cube.bin.stl");
+	Solid cube = Solid(
+		v(0, 0, 0),
+		v(0, 0, 0),
+		readFile("assets/cube.bin.stl")
+	);
 
 	// CNFGSetup( "Example App", 1024, 768 );
 	// while(1)

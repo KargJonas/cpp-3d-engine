@@ -13,6 +13,8 @@ public:
 
   Solid(Vec3 _position, Vec3 _rotation, vector<Triangle> _triangles)
   : position(_position), rotation(_rotation), triangles(_triangles) {
+
+    std::cout << triangles.size() << std::endl;
   }
 
   void move(Vec3 _position) {
@@ -27,8 +29,8 @@ public:
     // int triangleCount = triangles.size();
     // Solid adjustedTriangles[triangleCount];
 
-    for_each(triangles.begin(), triangles.end()) {
-    } // !!
+    // for_each(triangles.begin(), triangles.end()) {
+    // } // !!
 
     return *this;
   }

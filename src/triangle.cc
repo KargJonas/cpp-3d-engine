@@ -10,6 +10,10 @@ public:
     : normal(_normal), vertices({ v1, v2, v3 }) {
   }
 
+  Triangle(Vec3 vectors[4]) : normal(vectors[0]) {
+    for (uint8_t i = 0; i < 3; i++) vertices[i] = vectors[i + 1];
+  }
+
   // float getDistanceFromCamera(camera) {
   //   return vertices
   //     .reduce((accumulator, vertex) => accumulator.add(vertex), v3())
