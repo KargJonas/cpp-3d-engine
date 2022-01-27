@@ -7,13 +7,15 @@
 
 class Scene {
 public:
-  Camera camera;
+  Camera *camera;
   vector<Solid> solids;
   vector<Light> lights;
   map<string, int> solidNames;
 
-  Scene(Camera _camera)
+  Scene(Camera *_camera)
   : camera(_camera) { }
+
+  Scene() { }
 
   void addSolid(Solid _solid, string name) {
     uint index = solids.size();
@@ -24,6 +26,10 @@ public:
 
   void addLight(Light light) {
     lights.push_back(light);
+  }
+
+  void setCamera(Camera *_camera) {
+    camera = _camera;
   }
 
   // Should return reference, not value

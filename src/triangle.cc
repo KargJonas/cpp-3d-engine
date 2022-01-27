@@ -3,6 +3,7 @@
 class Triangle {
 public:
   Vec3 vertices[3];
+  Vec3 projected[3];
   Vec3 normal;
   float depth;
 
@@ -12,6 +13,11 @@ public:
 
   Triangle(Vec3 vectors[4]) : normal(vectors[0]) {
     for (uint8_t i = 0; i < 3; i++) vertices[i] = vectors[i + 1];
+  }
+
+  void project() {
+    for (uint8_t i = 0; i < 3; i++)
+      projected[i] = vertices[i].projectZ();
   }
 
   // float getDistanceFromCamera(camera) {
