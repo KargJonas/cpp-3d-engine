@@ -1,27 +1,34 @@
+#include <vector>
+#include <string>
+#include <map>
 #include "./camera.h"
+#include "./solid.h"
+#include "./directional_light.h"
 
 class Scene {
 public:
+  Camera camera;
+  vector<Solid> solids;
+  vector<Light> lights;
+  map<string, int> solidNames;
+
   Scene(Camera _camera)
-  : camera(_camera) {
-    this.solids = [];
-    this.lights = [];
+  : camera(_camera) { }
 
-    this.solidNames = {};
+  void addSolid(Solid _solid, string name) {
+    uint index = solids.size();
+    solidNames[name] = index;
+
+    solids.push_back(_solid);
   }
 
-  addSolid(solid, name) {
-    const index = this.solids.length;
-    this.solidNames[name] = index;
-    this.solids.push(solid);
+  void addLight(Light light) {
+    lights.push_back(light);
   }
 
-  getSolid(name) {
-    const index = this.solidNames[name];
-    return this.solids[index];
+  // Should return reference, not value
+  Solid getSolid(string name) {
+    uint index = solidNames[name];
+    return solids[index];
   }
-
-  addLight(light) {
-    this.lights.push(light);
-  }
-}
+};

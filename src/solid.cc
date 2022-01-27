@@ -9,12 +9,12 @@ public:
   Vec3 position;
   Vec3 rotation;
   vector<Triangle> triangles;
+  vector<Triangle> adjusted;
   uint triangleCount;
 
   Solid(Vec3 _position, Vec3 _rotation, vector<Triangle> _triangles)
   : position(_position), rotation(_rotation), triangles(_triangles) {
-
-    std::cout << triangles.size() << std::endl;
+    // adjusted = triangles;
   }
 
   void move(Vec3 _position) {
@@ -26,11 +26,18 @@ public:
   }
 
   Solid computeAdjusted() {
-    // int triangleCount = triangles.size();
-    // Solid adjustedTriangles[triangleCount];
+    // Im not sure how efficient this is,
+    // might have to change it.
+    adjusted = triangles;
 
-    // for_each(triangles.begin(), triangles.end()) {
-    // } // !!
+    for (Triangle triangle : adjusted) {
+      triangle. normal.rotate(rotation);
+
+      for (Vec3 vertex : triangle.vertices) {
+        vertex.add(position)
+          .rotateAround(position, rotation);
+      }
+    }
 
     return *this;
   }

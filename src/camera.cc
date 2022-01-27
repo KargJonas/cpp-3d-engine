@@ -9,7 +9,7 @@ public:
   Vec3 direction;
 
   Camera(Vec3 _position, Vec3 _rotation)
-    : position(_position), rotation(_rotation), direction(Vec3(0, 0, 0)) {
+    : position(_position), rotation(_rotation), direction(Vec3(0, 0, 1)) {
   }
 
   void aimTowards(Vec3 point) {

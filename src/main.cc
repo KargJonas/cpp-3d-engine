@@ -11,7 +11,8 @@ extern "C" {
 #include "./triangle.h"
 #include "./solid.h"
 #include "./vec3.h"
-#include "./binaryReader.h"
+#include "./binary_reader.h"
+#include "./scene.h"
 
 #define PI M_PI
 
@@ -24,32 +25,38 @@ int main()
 {
 	cout << "... Starting ..." << endl;
 
-	// Path has to be relative to compiled file
-	// cout << readFile("assets/cube.bin.stl") << endl;
+	Camera cam1(v(0, 0, -2), v(0, 0, 0));
+	Light light1(v(-1, 0, 0));
+	Scene scene1(cam1);
 
-	Solid cube = Solid(
+	Solid solid1(
 		v(0, 0, 0),
 		v(0, 0, 0),
 		readFile("assets/cube.bin.stl")
 	);
 
-	// CNFGSetup( "Example App", 1024, 768 );
-	// while(1)
-	// {
-	// 	CNFGBGColor = 0x000080ff; //Dark Blue Background
+	solid1.move(v(0, 0, 2));
+	scene1.addSolid(solid1, "my-cube");
 
-	// 	short w, h;
-	// 	CNFGClearFrame();
-	// 	CNFGHandleInput();
-	// 	CNFGGetDimensions( &w, &h );
+	scene1.addLight(light1);
 
-	// 	CNFGColor(b(255)); 
+	CNFGSetup( "Example App", 1024, 768 );
+	while(1)
+	{
+		CNFGBGColor = 0x000080ff; //Dark Blue Background
 
-	// 	//Draw a triangle
-	// 	RDPoint points[3] = { { 30, 36}, {20, 50}, { 40, 50 } };
-	// 	CNFGTackPoly( points, 3 );
+		short w, h;
+		CNFGClearFrame();
+		CNFGHandleInput();
+		CNFGGetDimensions( &w, &h );
 
-	// 	//Display the image and wait for time to display next frame.
-	// 	CNFGSwapBuffers();		
-	// }
+		CNFGColor(b(255)); 
+
+		//Draw a triangle
+		RDPoint points[3] = { { 30, 36}, {20, 50}, { 40, 50 } };
+		CNFGTackPoly( points, 3 );
+
+		//Display the image and wait for time to display next frame.
+		CNFGSwapBuffers();		
+	}
 }
