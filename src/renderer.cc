@@ -1,5 +1,3 @@
-#define CNFG_IMPLEMENTATION
-
 extern "C" {
 #include "./lib/rawdraw_sf.h"
 }
@@ -10,9 +8,11 @@ extern "C" {
 class Renderer {
 public:
   Scene scene;
+  int width, height;
 
-  Renderer(const char* windowName, int width, int height) {
-    // CNFGSetup(windowName, width, height);
+  Renderer(const char* windowName, int _width, int _height)
+  : width(_width), height(_height) {
+    CNFGSetup(windowName, width, height);
   }
 
   void setScene(Scene _scene) {
@@ -20,12 +20,13 @@ public:
   }
 
   void render() {
+    const int offsetW = 0.5 * width;
+    const int offsetH = 0.5 * height;
+
     CNFGBGColor = 0x000080ff;
 
 		CNFGClearFrame();
 		CNFGHandleInput();
-
-		CNFGColor(b(255));	
 
     for (Solid solid : scene.solids) {
       solid.computeAdjusted();
@@ -34,17 +35,39 @@ public:
       //   triangle.depth = 
       // }
 
-      for (Triangle tri : solid.triangles) {
-        tri.project();
+      for (Triangle tri : solid.adjusted) {
+        // tri.project();
 
-    		RDPoint points[3] = {
-          { tri.projected[0].x, tri.projected[0].y },
-          { tri.projected[1].x, tri.projected[1].y },
-          { tri.projected[2].x, tri.projected[2].y },
-        };
+        // std::cout << tri.vertices[0].toString() << "  \t=>\t" << tri.projected[0].toString() << std::endl;
 
-		    // CNFGTackPoly( points, 3 );	
-		    CNFGTackPoly( points, 3 );	
+        RDPoint points[3];
+
+        for (uint8_t i = 0; i < 3; i++) {
+          points[i] = {
+            // 0.5 * width + tri.projected[i].x * 0.5 * width,
+            // 0.5 * height + tri.projected[i].y * 0.5 * height
+
+            0.5 * width + tri.vertices[i].x * 0.5 * width,
+            0.5 * height + tri.vertices[i].y * 0.5 * height
+          };
+        }
+
+        // std::cout << tri.vertices[0].x << std::endl;
+
+		    CNFGColor(b(tri.normal.dot(scene.camera->direction) * 255));	
+  	    CNFGTackPoly( points, 3 );
+
+        CNFGColor(rgb(255, 0, 0));
+        for (short i = 0; i < 3; i++) {
+          int next = (i + 1) % 3;
+          
+          CNFGTackSegment(
+            points[i].x,
+            points[i].y,
+            points[next].x,
+            points[next].y
+          );
+        }
       }
     }
 

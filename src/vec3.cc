@@ -2,6 +2,8 @@
 #include "fmt/format.h"
 #include <iostream>
 
+#include "./prettyPrint.h"
+
 using namespace std;
 
 class Vec3 {
@@ -11,6 +13,7 @@ public:
   float z;
 
   Vec3(float _x, float _y, float _z) : x(_x), y(_y), z(_z) { }
+  // Vec3(Vec3 other) : x(other.x), y(other.y), z(other.z) : { }
   Vec3() : x(0), y(0), z(0) { }
 
   // ~Vec3() {
@@ -20,11 +23,21 @@ public:
   // }
 
   string toString() {
-    return fmt::format("Vec3 ( {}, {}, {} )", x, y, z);
+    return fmt::format(magenta("Vec3") + " ( {}, {}, {} )", x, y, z);
   }
 
   void print() {
     cout << toString() << endl;
+  }
+
+  void print(string from) {
+    string message = fmt::format(
+      "{} \t[{}]",
+      toString(),
+      red(from)
+    );
+
+    cout << message << endl << endl;
   }
 
   Vec3 clone() {
@@ -137,9 +150,11 @@ public:
   }
 
   Vec3 rotate(Vec3 angle) {
-    return rotateX(angle.x)
-      .rotateY(angle.y)
-      .rotateZ(angle.z);
+    rotateX(angle.x);
+    rotateY(angle.y);
+    rotateZ(angle.z);
+    
+    return *this;
   }
 
   Vec3 rotateAround(Vec3 pivot, Vec3 angle) {
